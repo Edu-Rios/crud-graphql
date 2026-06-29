@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: inventario_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app # Sincroniza tu código local en tiempo real
+
+  frontend:
+    build: ./frontend
+    container_name: inventario_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app # Sincroniza tu código local en tiempo real
+      - /app/node_modules # Evita conflictos con tu computadora local
+    depends_on:
+      - backend
